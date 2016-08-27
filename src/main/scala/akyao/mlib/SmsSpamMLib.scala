@@ -22,8 +22,6 @@ object SmsSpamMLib {
       .map(_.split("\\s"))
       .map(v => new LabeledPoint(if (v(0) == "spam") 1.0 else 0.0, hashingTF.transform(v.drop(1))))
 
-    println(data)
-
     val scaler = new StandardScaler().fit(data.map(_.features))
     val scaledData = data.map(v => v.copy(features = scaler.transform(v.features)))
 
@@ -60,5 +58,4 @@ object SmsSpamMLib {
 
     sc.stop()
   }
-
 }
